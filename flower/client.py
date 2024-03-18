@@ -19,9 +19,6 @@ class TreeClient(fl.client.NumPyClient):
         #model = utils.set_model_params(model,parameters)
         model.fit(x_treino,y_treino)
         accuracy  = accuracy_score(y_teste,model.predict(x_teste))
-        print("*************************************************")
-        print(parameters)
-        print("*************************************************")
         return (utils.get_model_params(model), len(x_treino), {"accuracy": accuracy})
    
     def evaluate(self,parameters,config):
