@@ -3,14 +3,23 @@ import numpy as np
 from gymnasium import spaces
 import numpy as np
 import random
+import pandas as pd
+
+
+train_x = pd.read_csv('data/train_x')
+train_y = pd.read_csv('data/train_y')
+df_train_x = np.array(train_x).astype(np.float32)
+df_train_y = np.array(train_y).astype(np.float32)
+df_train_x = np.expand_dims(df_train_x, 1)
+df_train_y = np.expand_dims(df_train_y, 1)
 
 class TabularEnv(gym.Env):
     """
     Action Space:
-    - Discrete space with two actions (0 or 1). For Classification
+    - Discrete space with two actions (0 or 1). For Classification 1 means benign and 0 means an attack
 
     Observation Space:
-    - Box space with shape (1, 18) and dtype float32, representing a set of features for the space ship control task.
+    - Box space with shape (1, 79) and dtype float32, representing a set of features for the space ship control task.
 
     Methods:
     - step(action): Takes an action and returns the next observation, reward, done flag, and additional info.
@@ -28,15 +37,16 @@ class TabularEnv(gym.Env):
     - expected_action (int): Expected action based on the current observation.
     """
 
-    def __init__(self, row_per_episode=1, dataset=(df_train_X, df_train_y), random=True):
+    def __init__(self, row_per_episode=1, dataset=(df_train_x, df_train_y), random=True):
         super().__init__()
 
         # Define action space
         self.action_space = gym.spaces.Discrete(2)
 
         # Define observation space
-        obersevation = np.array([[np.finfo('float32').max] * 18], dtype=np.float32)
-        self.observation_space = spaces.Box(-obersevation, obersevation, shape=(1, 18), dtype=np.float32)
+        observation = np.array([[np.finfo('float32').max] * 78], dtype=np.float32 )
+        #observation = observation.flatten()
+        self.observation_space = spaces.Box(-observation, observation, shape=(1,78), dtype=np.float32)
 
         # Initialize parameters
         self.row_per_episode = row_per_episode
@@ -59,18 +69,20 @@ class TabularEnv(gym.Env):
         - info (dict): Additional information.
         """
 
-        done = False
+        self.terminated = False
         reward = int(action == self.expected_action)
 
         obs = self._next_obs()
 
         self.step_count += 1
         if self.step_count >= self.row_per_episode:
-            done = True
+            self.terminated = True
+        
+        info ={}
+        self.truncated = False
+        return obs, reward, self.terminated, self.truncated, info
 
-        return obs, reward, done, {}
-
-    def reset(self):
+    def reset(self, seed=None, options=None):
         """
         Resets the environment to the initial state and returns the initial observation.
 
@@ -81,7 +93,8 @@ class TabularEnv(gym.Env):
         self.step_count = 0
 
         obs = self._next_obs()
-        return obs
+        info = {}
+        return obs, info
 
     def _next_obs(self):
         """
