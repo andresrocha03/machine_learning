@@ -37,7 +37,7 @@ class TabularEnv(gym.Env):
     - expected_action (int): Expected action based on the current observation.
     """
 
-    def __init__(self, row_per_episode=1, dataset=(df_train_x, df_train_y), random=True):
+    def __init__(self, row_per_episode=1000, dataset=(df_train_x, df_train_y), random=True):
         super().__init__()
 
         # Define action space
