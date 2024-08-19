@@ -19,7 +19,7 @@ class TabularEnv(gym.Env):
     - Discrete space with two actions (0 or 1). For Classification 1 means benign and 0 means an attack
 
     Observation Space:
-    - Box space with shape (1, 79) and dtype float32, representing a set of features for the space ship control task.
+    - Box space with shape (1, 78) and dtype float32, representing a set of features for the intrusion data set.
 
     Methods:
     - step(action): Takes an action and returns the next observation, reward, done flag, and additional info.
@@ -28,7 +28,7 @@ class TabularEnv(gym.Env):
 
     Attributes:
     - action_space: Discrete space with two actions (0 or 1).
-    - observation_space: Box space with shape (1, 18) and dtype float32.
+    - observation_space: Box space with shape (1, 78) and dtype float32.
     - row_per_episode (int): Number of rows per episode.
     - step_count (int): Counter for the number of steps within the current episode.
     - x, y: Features and labels from the dataset.
@@ -37,7 +37,7 @@ class TabularEnv(gym.Env):
     - expected_action (int): Expected action based on the current observation.
     """
 
-    def __init__(self, row_per_episode=1000, dataset=(df_train_x, df_train_y), random=True):
+    def __init__(self, row_per_episode=1, dataset=(df_train_x, df_train_y), random=True):
         super().__init__()
 
         # Define action space
@@ -71,7 +71,8 @@ class TabularEnv(gym.Env):
 
         self.terminated = False
         reward = int(action == self.expected_action)
-
+        print(f"expected: {self.expected_action}")
+            
         obs = self._next_obs()
 
         self.step_count += 1
