@@ -1,0 +1,14 @@
+Pre-processing:
+validation < training?
+acredito que sim!
+
+IDS:
+qual o estado da arte dos IDS?
+Reinforcement learning para tabular data é melhor?
+
+RL
+mudar o tamanho do episódio para até que se detecte um ataque?
+
+
+flower:
+

@@ -1,0 +1,47 @@
+rodar classificacao
+rodar ataques juntos (todos os ataques identificados como 1) e separados (um código para cada ataque)
+        balanceado e desbalanceado
+
+Resultados 1:
+(random)
+----joined 
+A2C - 90 no treino, 90 na validação
+PPO - 94 no treino, 88 na validação
+DQN - 88 no treino, 90 na validação
+----separated
+A2C - 82 no treino, 79 na validação
+
+
+(ordered)
+---joined 
+        treino      validacao
+A2C       86           88
+PPO       88           88
+DQN       92           90 
+
+---separated
+        treino      validacao
+A2C       72           80
+PPO       84           79
+DQN       74           74    
+
+
+
+rodar classificadores nas 8 bases
+comparar e avaliar
+
+Pre-processing:
+        balancear o conjunto de dados (tirar dados acima do x)
+        validation > training
+
+Classificacao:
+        rodar mlp junto com os classificadores
+        ataques diferentes dos presentes no treino 
+
+RL:
+        Precision e Recall e Tempo de treinamento do RL
+
+fazer tudo dnv (rodar para unique_atack e splite_attack)
+
+
+RESULTADOS 2:
