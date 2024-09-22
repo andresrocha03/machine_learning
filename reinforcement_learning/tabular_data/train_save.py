@@ -1,14 +1,16 @@
 import gymnasium as gym
-from stable_baselines3 import DQN
-from stable_baselines3.common.callbacks import EvalCallback
-from stable_baselines3.common.evaluation import evaluate_policy
-
+from stable_baselines3 import A2C, PPO, DQN
 import os
-from tabularenv import TabularEnv
+from environments.tabularenv import TabularEnv
 
-modelstr = "DQN"
-models_dir = "models/" + modelstr
-logdir  = "logs"
+
+selected = "DQN"
+option = "separated"
+modelstr = f"{selected}_{option}"
+
+models_dir = f"models/ordered/{modelstr}" 
+logdir  = "logs/ordered"
+
 
 if not os.path.exists(models_dir):
     os.makedirs(models_dir)
@@ -18,9 +20,9 @@ if not os.path.exists(logdir):
 env = TabularEnv()
 env.reset()
 
-model = DQN("MlpPolicy", env, verbose=1,tensorboard_log=logdir)
+model = DQN("MlpPolicy", env,tensorboard_log=logdir)
 
-TIMESTEPS = 10000
+TIMESTEPS = 680000
 
 model.learn(total_timesteps=TIMESTEPS, reset_num_timesteps=False, tb_log_name=modelstr)
-model.save(f"{models_dir}/DQN_model")   
+model.save(f"{models_dir}/{selected}_{option}")   
