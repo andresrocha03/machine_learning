@@ -51,6 +51,10 @@ class TabularEnv(gym.Env):
         self.observation_space = spaces.Box(-observation, observation, shape=(1,columns), dtype=np.float32)
 
         # Initialize parameters
+        self.tp = 0
+        self.fp = 0
+        self.tn = 0
+        self.fn = 0
         self.row_per_episode = row_per_episode
         self.step_count = 0
         self.x, self.y = dataset
@@ -58,6 +62,19 @@ class TabularEnv(gym.Env):
         self.current_obs = None
         self.dataset_idx = 0
         self.count = 0
+
+    def precision_recall(self, action):
+        if action == 1 and self.expected_action == 1:
+            self.tp += 1
+        elif action == 1 and self.expected_action == 0:
+            self.fp += 1
+        elif action == 0 and self.expected_action == 0:
+            self.tn += 1
+        elif action == 0 and self.expected_action == 1:
+            self.fn += 1
+        precision = float(self.tp) / float((self.tp + self.fp))
+        recall = float(self.tp) / float((self.tp + self.fn))
+        return precision, recall
 
     def step(self, action):
         """
@@ -78,10 +95,10 @@ class TabularEnv(gym.Env):
             reward = 1
         else:
             reward = -1
-        print(f"step: {self.count}")
-        print(f"index: {self.dataset_idx}")
-        print(f"action: {action}")
-        print(f"expected: {self.expected_action}")
+
+        precision, recall = self.precision_recall(action) #isso funcionará para o case do one_attack
+        #como calcular precision e recall para dados multicategoricos?
+
         self.count += 1
 
         obs = self._next_obs()
@@ -90,7 +107,15 @@ class TabularEnv(gym.Env):
         if self.step_count >= self.row_per_episode:
             self.terminated = True
         
-        info ={}
+        info = {precision: precision, recall: recall}
+
+        print(f"step: {self.count}")
+        print(f"index: {self.dataset_idx}")
+        print(f"action: {action}")
+        print(f"expected: {self.expected_action}")
+        print(f"precision: {precision}")
+        print(f"recall: {recall}")
+        
         self.truncated = False
         return obs, reward, self.terminated, self.truncated, info
 
