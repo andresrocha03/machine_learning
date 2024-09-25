@@ -7,7 +7,7 @@ import pandas as pd
 
 
 columns = 15
-actions = 15
+num_actions = 15
 train_x = pd.read_csv('data/sep_train_x')
 train_y = pd.read_csv('data/sep_train_y')
 df_train_x = np.array(train_x).astype(np.float32)
@@ -43,7 +43,7 @@ class TabularEnv(gym.Env):
         super().__init__()
 
         # Define action space
-        self.action_space = gym.spaces.Discrete(actions)
+        self.action_space = gym.spaces.Discrete(num_actions)
 
         # Define observation space
         observation = np.array([[np.finfo('float32').max] * columns], dtype=np.float32 )
@@ -64,18 +64,30 @@ class TabularEnv(gym.Env):
         self.count = 0
 
     def precision_recall(self, action):
-        if action == 1 and self.expected_action == 1:
-            self.tp += 1
-        elif action == 1 and self.expected_action == 0:
-            self.fp += 1
-        elif action == 0 and self.expected_action == 0:
-            self.tn += 1
-        elif action == 0 and self.expected_action == 1:
-            self.fn += 1
-        precision = float(self.tp) / float((self.tp + self.fp))
-        recall = float(self.tp) / float((self.tp + self.fn))
+        self.confusion_matrix[self.expected_action][action] += 1
+        precision, recall = 0,0
+        if (num_actions == 2):
+            tp = self.confusion_matrix[1][1]
+            fp = self.confusion_matrix[0][1]
+            fn = self.confusion_matrix[1][0]
+            if ((tp + fp) == 0) or (tp+fn == 0):
+                return precision, recall
+            else:
+                precision = float(tp) / float((tp + fp))
+                recall = float(tp) / float((tp + fn))
+                return precision, recall
+        else: 
+            for i in range(num_actions):
+                tp = self.confusion_matrix[i][i]
+                fp = np.sum(self.confusion_matrix.T[i]) - tp
+                fn = np.sum(self.confusion_matrix[i]) - tp
+                if ((tp + fp) == 0) or (tp+fn == 0):
+                    continue
+                else:
+                    precision += float(tp) / float((tp + fp))
+                    recall += float(tp) / float((tp + fn))
         return precision, recall
-
+   
     def step(self, action):
         """
         Takes an action and returns the next observation, reward, done flag, and additional info.
