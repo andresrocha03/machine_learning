@@ -1,15 +1,23 @@
+
+import os
+import time
+import sys
+
 import gymnasium as gym
 from stable_baselines3 import A2C, PPO, DQN
-import os
-from environments.tabularenv import TabularEnv
-import time
+
+
+# sys.path.insert(0,'/home/andre/unicamp/IC/machine_learning/reinforcement_learning/tabular_data/environments')
+from environments.tabularenv_train import TabularEnv
+
+
 
 selected = "DQN"
-option = "separated"
+option = "mul"
 modelstr = f"{selected}_{option}"
 
-models_dir = f"models/ordered/{modelstr}" 
-logdir  = "logs/ordered"
+models_dir = f"models/multiple_attack/{modelstr}" 
+logdir  = "logs/one_mul"
 
 
 if not os.path.exists(models_dir):
@@ -23,7 +31,7 @@ env.reset()
 model = DQN("MlpPolicy", env,tensorboard_log=logdir)
 
 
-TIMESTEPS = 200000
+TIMESTEPS = 140000
 
 inicio = time.time()
 model.learn(total_timesteps=TIMESTEPS, reset_num_timesteps=False, tb_log_name=modelstr)
