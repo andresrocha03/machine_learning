@@ -1,0 +1,45 @@
+Resultados obtidos com a base de dados joined, que estava desbalanceada.
+
+
+classificadores
+----joined
+algoritmo               tempo_treinamento       accuracy      precision         Recall          tempo_predicoes
+Naive Bayes                     0.29              0.85          0.77            0.744                   0.27
+Logistic Regression             0.65              0.88          0.81            0.80                    0.04
+Random Forest                   20.57             0.90          0.92            0.76                    9.76
+KNN                             0.61              0.90          0.83            0.86                    1474
+Decision Tree                   29.4              0.86          0.82            0.69                    0.08
+
+---separated
+algoritmo               tempo_treinamento       accuracy      precision         Recall          tempo_predicoes
+Naive Bayes                     0.38              0.78          0.13            0.173                   1.02
+Logistic Regression             37.91             0.70          0.09            0.09                    0.13
+Random Forest                   33.77             0.84          0.30            0.09                    9.90
+KNN                             0.69              0.84          0.25            0.21                    3274.41
+Decision Tree                   36.91             0.77          0.16            0.14                    0.11
+
+
+
+
+Resultados 1:
+(random)
+----joined 
+A2C - 90 no treino, 90 na validação
+PPO - 94 no treino, 88 na validação
+DQN - 88 no treino, 90 na validação
+----separated
+A2C - 82 no treino, 79 na validação
+
+
+(ordered)
+---joined 
+        treino      validacao
+A2C       86           88
+PPO       88           88
+DQN       92           90 
+
+---separated
+        treino      validacao
+A2C       72           80
+PPO       84           79
+DQN       74           74    
