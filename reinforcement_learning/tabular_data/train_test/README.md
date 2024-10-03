@@ -1,4 +1,4 @@
-# Training_Validation Folder
+# Train_test folder
 ## folders
 The environments folder contains the custom environments for training the RL agents.
 
