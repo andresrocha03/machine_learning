@@ -3,7 +3,7 @@ Pre-processing:
         validation > training - done
 
 RL:
-        Precision e Recall e Tempo de treinamento do RL
+        Precision e Recall e Tempo de treinamento do RL - ok
 
 Classificacao:
         rodar mlp junto com os classificadores
@@ -17,3 +17,6 @@ fazer tudo dnv (rodar para unique_atack e split_attack)
 
 
 RESULTADOS 2:
+
+
+xgboost
