@@ -1,6 +1,4 @@
 Pre-processing:
-validation < training?
-acredito que sim!
 
 IDS:
 qual o estado da arte dos IDS?

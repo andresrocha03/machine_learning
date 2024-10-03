@@ -16,7 +16,6 @@ fazer tudo dnv (rodar para unique_atack e split_attack)
         comparar e avaliar
 
 
-RESULTADOS 2:
 
-
-xgboost
+Usar xgboost
+Federar usando flower
