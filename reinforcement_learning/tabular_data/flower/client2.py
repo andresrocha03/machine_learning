@@ -37,11 +37,11 @@ if model.fit_intercept:
 
 class SimpleClient(fl.client.NumPyClient):
     def __init__(self, X_train, y_train, X_test, y_test):
-    
+        super().__init__()
         self.X_train, self.y_train = X_train, y_train
         self.X_test, self.y_test = X_test, y_test
 
-    def get_parameters(self, config):
+    def get_parameters(self,config):
         return utils.get_model_parameters(model)
     
     def set_parameters(self, parameters):
@@ -53,6 +53,7 @@ class SimpleClient(fl.client.NumPyClient):
     def fit(self, parameters, config):
         self.set_parameters(parameters)
         model.fit(self.X_train, self.y_train)
+
         return utils.get_model_parameters(model), len(self.X_train), {}
 
     def evaluate(self, parameters, config):
@@ -77,4 +78,4 @@ if __name__ == "__main__":
     # args = parser.parse_args()
 
     # Assuming the partitioner is already set up elsewhere and loaded here
-    fl.client.start_client(server_address="0.0.0.0:8080", client=create_client(0).to_client())
+    fl.client.start_client(server_address="0.0.0.0:8080", client=create_client(1).to_client())

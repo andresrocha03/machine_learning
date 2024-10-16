@@ -1,19 +1,12 @@
+from typing import List, Tuple, Union
+
 import numpy as np
-from flwr.common import NDArrays
-from flwr_datasets import FederatedDataset
-from flwr_datasets.partitioner import IidPartitioner
+import pandas as pd
 from sklearn.linear_model import LogisticRegression
-from datasets import load_dataset
+from sklearn.model_selection import cross_validate, train_test_split
 
-# This information is needed to create a correct scikit-learn model
-UNIQUE_LABELS = [0, 1]
-FEATURES = [i for i in range(15)]
-data_file = "one_attack.csv"
-dataset = load_dataset("csv", data_files=data_file)
-
-
-def get_model_parameters(model: LogisticRegression) -> NDArrays:
-    """Return the parameters of a sklearn LogisticRegression model."""
+def get_model_parameters(model: LogisticRegression):
+    """Returns the paramters of a sklearn LogisticRegression model."""
     if model.fit_intercept:
         params = [
             model.coef_,
@@ -24,53 +17,3 @@ def get_model_parameters(model: LogisticRegression) -> NDArrays:
             model.coef_,
         ]
     return params
-
-
-def set_model_params(model: LogisticRegression, params: NDArrays) -> LogisticRegression:
-    """Set the parameters of a sklean LogisticRegression model."""
-    model.coef_ = params[0]
-    if model.fit_intercept:
-        model.intercept_ = params[1]
-    return model
-
-
-def set_initial_params(model: LogisticRegression, n_classes: int, n_features: int):
-    """Set initial parameters as zeros.
-
-    Required since model params are uninitialized until model.fit is called but server
-    asks for initial parameters from clients at launch. Refer to
-    sklearn.linear_model.LogisticRegression documentation for more information.
-    """
-    model.classes_ = np.array([i for i in range(n_classes)])
-
-    model.coef_ = np.zeros((n_classes, n_features))
-    if model.fit_intercept:
-        model.intercept_ = np.zeros((n_classes,))
-
-
-def create_log_reg_and_instantiate_parameters(penalty):
-    model = LogisticRegression(
-        penalty=penalty,
-        max_iter=1,  # local epoch
-        warm_start=True,  # prevent refreshing weights when fitting,
-        solver="saga",
-    )
-    # Setting initial parameters, akin to model.compile for keras models
-    set_initial_params(model, n_features=len(FEATURES), n_classes=len(UNIQUE_LABELS))
-    return model
-
-
-fds = None  # Cache FederatedDataset
-
-
-def load_data(partition_id: int, num_partitions: int):
-    """Load the data for the given partition."""
-    partitioner = IidPartitioner(num_partitions=num_partitions)
-    partitioner.dataset = dataset    
-    partition = partitioner.load_partition(partition_id=partition_id)
-    X = dataset[FEATURES]
-    y = dataset["label"]
-    # Split the on-edge data: 80% train, 20% test
-    X_train, X_test = X[: int(0.8 * len(X))], X[int(0.8 * len(X)) :]
-    y_train, y_test = y[: int(0.8 * len(y))], y[int(0.8 * len(y)) :]
-    return X_train, y_train, X_test, y_test
