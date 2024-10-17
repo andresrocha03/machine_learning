@@ -16,7 +16,7 @@ df = pd.read_csv("x_one_complete.csv")
 
 model = LogisticRegression()
 # Setting initial parameters, akin to model.compile for keras models
-model = utils.set_initial_params(model)
+utils.set_initial_params(model)
 
 class SimpleClient(fl.client.NumPyClient):
     def __init__(self, X_train, y_train, X_test, y_test):
@@ -27,7 +27,7 @@ class SimpleClient(fl.client.NumPyClient):
         return utils.get_model_parameters(model)
     
     def set_parameters(self, parameters):
-       model = utils.set_model_params(model, parameters)
+       utils.set_model_params(model, parameters)
 
     def fit(self, parameters, config):
         self.set_parameters(parameters)
@@ -45,7 +45,7 @@ class SimpleClient(fl.client.NumPyClient):
 
 def create_client(cid: str):
     #get train and test data
-    X_train, y_train, X_test, y_test = utils.load_data(partitions[int(cid)], random_seed=42, test_split=0.2)
+    X_train, X_test, y_train, y_test = utils.load_data(partitions[int(cid)-1], random_seed=42, test_split=0.2)
     return SimpleClient(X_train, y_train, X_test, y_test)
 
 if __name__ == "__main__":

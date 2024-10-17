@@ -14,12 +14,7 @@ def load_data(partition: list[NDArray], test_split: float, random_seed=42):
     X = partition.drop('label', axis=1).values
     y = partition['label'].values
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_split, random_state=random_seed)
-    return {
-        "X_train": X_train,
-        "X_test": X_test,
-        "y_train": y_train,
-        "y_test": y_test,
-    }    
+    return X_train, X_test, y_train, y_test 
 
 def partition_data(data, num_partitions):
 # Partitioning the dataset into parts for each client
