@@ -51,7 +51,7 @@ if __name__ == "__main__":
         min_available_clients=2,
         on_fit_config_fn=fit_round,
         initial_parameters=parameters,
-        evaluate_metrics_aggregation_fn=weighted_average
+        evaluate_metrics_aggregation_fn=weighted_average,
         )
 
     #start the server

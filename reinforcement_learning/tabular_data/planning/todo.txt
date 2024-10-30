@@ -19,3 +19,4 @@ fazer tudo dnv (rodar para unique_atack e split_attack)
 
 Usar xgboost
 Federar usando flower
+wandb

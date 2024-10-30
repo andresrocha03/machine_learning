@@ -28,7 +28,6 @@ if not os.path.exists(logdir):
 env = TabularEnv()
 env.reset()
 
-model = DQN("MlpPolicy", env,tensorboard_log=logdir)
 
 
 TIMESTEPS = 140000
