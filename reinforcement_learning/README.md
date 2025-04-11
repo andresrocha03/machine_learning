@@ -10,12 +10,12 @@ There is a difference between on and off-policy methods. If behaviour and target
 
 If the environment model is fully known we can use dynamic programming methods, such as policy iteration or value iteration. However, fully modeling the environment is usually impossible. In this case, there are other options such as the Monte Carlo and Temporal Difference. All these methods need to calculate optimal state-action values to obtain optimal policy, reason why they are called value-based. There are other classes of methods called policy gradient and actor critic methods.
 
-### Main algorithms
+### Main methods
 
 Deep Q-learning is the most classic value-based algorithm. It uses temporal difference, deep neural network for estimating the state-action function, and experience-replay - this last one makes him an off policy method.
+One key point of DQN for enhancing exploration is an e-greedy approach.
 
-
-
+Rainbow is an algorithm with optimal performance that combines double DQN, priotitized experience replay, dueling network, noisy network, multistep learning and distributional DQN.
 
 
 
