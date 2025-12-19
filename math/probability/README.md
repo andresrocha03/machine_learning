@@ -1,6 +1,7 @@
 # Probability
-Inspired in this [course](https://ocw.mit.edu/courses/18-440-probability-and-random-variables-spring-2014/pages/syllabus/).
-## Distributions 
+A good way to learn it is to follow this [course](https://ocw.mit.edu/courses/18-440-probability-and-random-variables-spring-2014/pages/syllabus/).
+
+## Distributions reminder
 
 ### Bernoulli
 Random experiment executed multiple independent times under the same conditions with a result of failure or success with constanst probability. P = (p^k)*(q^(n-k))
