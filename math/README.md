@@ -3,4 +3,4 @@ Developing a strong background in math is really important for a deep understand
 
 ## References
 
-[This](https://mml-book.github.io/) is a good book reference to summarize and master the main concepts of math for machine learning.
+[This](https://mml-book.github.io/) is a good book reference to be introducted to the the main concepts of math for machine learning.
