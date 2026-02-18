@@ -31,7 +31,7 @@ P(T = n) = q^{\,n-1}p.
 Suppose that we have a set of $N$ balls, of which $$k$ are red and $N − k$ are blue. We choose $n$ of these balls, without replacement, and define $X$ to be the number of red balls in our sample. The distribution of $X$ is called the hypergeometric distribution.
 We note that this distribution depends upon three parameters, namely $N$ , $$k$, and
 $n$. 
-There does not seem to be a standard notation for this distribution; we can use the notation $h(N, k, n, x)$ to denote $P (X = x)$. This probability can be found by noting that there are $\binom{n}$ different samples of size n, and the number of such samples with exactly x red balls is obtained by multiplying the number of ways of choosing x red balls from the set of k red balls and the number of ways of choosing n − x blue balls from the set of $N − k$ blue balls. Hence, we have
+There does not seem to be a standard notation for this distribution; we can use the notation $h(N, k, n, x)$ to denote $P (X = x)$. This probability can be found by noting that there are $\binom{N}{n}$ different samples of size n, and the number of such samples with exactly x red balls is obtained by multiplying the number of ways of choosing x red balls from the set of k red balls and the number of ways of choosing n − x blue balls from the set of $N − k$ blue balls. Hence, we have
 $h(N, k, n, x) = \frac{\binom{k}{x}\binom{N-k}{n-x}}{\binom{N}{n}}
 
 ## Densities
