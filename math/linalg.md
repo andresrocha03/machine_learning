@@ -23,24 +23,19 @@ $$
 
 where:
 
-- $U \in \mathbb{R}^{m \times m}$ has orthonormal columns  
-  $$
-  U^T U = I
-  $$
-- $V \in \mathbb{R}^{n \times n}$ has orthonormal columns  
-  $$
-  V^T V = I
-  $$
+- $U \in \mathbb{R}^{m \times m}$ has orthonormal columns  $$  U^T U = I  $$
+- $V \in \mathbb{R}^{n \times n}$ has orthonormal columns  $$  V^T V = I  $$
 - $\Sigma \in \mathbb{R}^{m \times n}$ is diagonal with nonnegative entries  
-  $$
-  \Sigma = \mathrm{diag}(\sigma_1, \dots, \sigma_r)
-  $$
-  with
-  $$
-  \sigma_1 \ge \sigma_2 \ge \dots \ge \sigma_r \ge 0
-  $$
 
-The numbers $\sigma_i$ are called **singular values**.
+$$
+\Sigma = \mathrm{diag}(\sigma_1, \dots, \sigma_r)
+$$
+with
+$$
+\sigma_1 \ge \sigma_2 \ge \dots \ge \sigma_r \ge 0
+$$
+
+The numbers $\sigma_i$ are called singular values.
 
 
 #### Relation to Spectral Decomposition
