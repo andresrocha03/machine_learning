@@ -40,8 +40,9 @@ $h(N, k, n, x) = \frac{\binom{k}{x}\binom{N-k}{n-x}}{\binom{N}{n}}$
 ## Densities
 ### Normal Density
 Central Limit Theorem: the sum of infinite random variables follows a normal distribution.
+
 $$
-f_X(x) = \frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(x-\mu)^2} {2\sigma^2}\right)
+f_X(x) = \frac{1}{\sqrt{2\pi\sigma^2}}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)
 $$
 
 We can find the CDF, by the standard normal CDF ($\phi$) with the folllowing procedure:
