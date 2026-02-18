@@ -5,7 +5,7 @@ One of the best youtube channels about math and computer science. This playlist 
 
 ## SVD
 
-### Singular Value Decomposition — Synthesis
+### Singular Value Decomposition
 
 #### Definition
 
@@ -91,10 +91,9 @@ So:
 
 - Left singular vectors $u_i$ are eigenvectors of $X X^T$
 
-Thus SVD contains spectral decomposition inside it.
+Also, applying SVD on a symmetric and PSD matrix gives us the spectral decomposition.
 
-#### Stretching Property (Geometric Interpretation)
-
+#### Stretching Property
 SVD decomposes a linear transformation into rotation, stretching and rotation. Indeed:
 
 $$
