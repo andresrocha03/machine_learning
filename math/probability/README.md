@@ -48,8 +48,8 @@ We can find the CDF, by the standard normal CDF ($\phi$) with the folllowing pro
 
 $$
 F_X(x) = P(X \le x)
-    = P\!\left( Z \le \frac{x - \mu}{\sigma} \right)
-    = F_Z\!\left( \frac{x - \mu}{\sigma} \right).
+    = P\left( Z \le \frac{x - \mu}{\sigma} \right)
+    = F_Z\left( \frac{x - \mu}{\sigma} \right).
 $$
 
 Where $Z = \frac{X - \mu}{\sigma}.$
