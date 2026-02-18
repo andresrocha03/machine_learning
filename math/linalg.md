@@ -5,9 +5,9 @@ One of the best youtube channels about math and computer science. This playlist 
 
 ## SVD
 
-# Singular Value Decomposition — Synthesis
+### Singular Value Decomposition — Synthesis
 
-## Definition
+#### Definition
 
 For any matrix  
 
@@ -43,7 +43,7 @@ where:
 The numbers $\sigma_i$ are called **singular values**.
 
 
-## Relation to Spectral Decomposition
+#### Relation to Spectral Decomposition
 
 SVD is closely related to eigen-decomposition.
 
@@ -98,7 +98,7 @@ So:
 
 Thus SVD contains spectral decomposition inside it.
 
-## Stretching Property (Geometric Interpretation)
+#### Stretching Property (Geometric Interpretation)
 
 SVD decomposes a linear transformation into rotation, stretching and rotation. Indeed:
 
@@ -112,7 +112,7 @@ Applied to a vector $x$:
 2. $\Sigma$ stretches it along coordinate axes
 3. $U$ rotates it again
 
-## Connection to PCA and Covariance
+#### Connection to PCA and Covariance
 
 If $X$ is a centered data matrix (rows = data points), the covariance matrix is:
 
