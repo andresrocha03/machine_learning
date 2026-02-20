@@ -40,7 +40,10 @@ The numbers $\sigma_i$ are called singular values.
 
 #### Relation to Spectral Decomposition
 
-SVD is closely related to eigen-decomposition.
+SVD is closely related to eigen-decomposition. 
+If we apply SVD on $M$, the columns of $V$ are eigenvectors of $M^TM$.
+Applying SVD on a symmetric and PSD matrix gives us the spectral decomposition (SVD and spectral decomposition coincide).
+
 
 Consider:
 
@@ -91,7 +94,6 @@ So:
 
 - Left singular vectors $u_i$ are eigenvectors of $X X^T$
 
-Also, applying SVD on a symmetric and PSD matrix gives us the spectral decomposition.
 
 #### Stretching Property
 SVD decomposes a linear transformation into rotation, stretching and rotation. Indeed:
